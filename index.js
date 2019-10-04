@@ -316,7 +316,7 @@
          * Load and decode base 64 encoded sounds.
          */
         loadSounds: function () {
-            if (!IS_IOS) {
+            try {
                 this.audioContext = new AudioContext();
 
                 var resourceTemplate =
@@ -333,6 +333,8 @@
                         this.soundFx[index] = audioData;
                     }.bind(this, sound));
                 }
+            } catch(e) {
+              console.error('Web Audio API is not supported in this browser');
             }
         },
 
